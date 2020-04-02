@@ -1,37 +1,34 @@
 package com.farhad.Spring5webapp.model;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
     private String title;
     private String isbn;
-    private String publisher;
+    @OneToOne
+    private Publisher1 publisher;
 
     @ManyToMany
     @JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name="author_id"))
     private Set<Author> authors = new HashSet<>();
 
-    public Book(int id, String title, String isbn, String publisher, Set<Author> authors) {
-        this.id = id;
+    public Book(String title, String isbn, Publisher1 publisher) {
         this.title = title;
         this.isbn = isbn;
         this.publisher = publisher;
-        this.authors = authors;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -51,11 +48,11 @@ public class Book {
         this.isbn = isbn;
     }
 
-    public String getPublisher() {
+    public Publisher1 getPublisher() {
         return publisher;
     }
 
-    public void setPublisher(String publisher) {
+    public void setPublisher(Publisher1 publisher) {
         this.publisher = publisher;
     }
 
