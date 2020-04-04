@@ -14,6 +14,8 @@ public class Publisher1 {
     private String name;
     private String address;
 
+    public Publisher1(){}
+
     public Publisher1(String name, String address) {
         this.name = name;
         this.address = address;
